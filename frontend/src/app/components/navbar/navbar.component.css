@@ -1,0 +1,62 @@
+
+
+
+
+
+/* .login-btn  {background-image: linear-gradient(to right, #000000 0%, #434343  51%, #000000  100%)}
+.login-btn {
+   margin: 10px;
+   padding: 15px 45px;
+   text-align: center;
+   transition: 0.5s;
+   background-size: 200% auto;
+   color: white;            
+   border-radius: 10px;
+   display: block;
+ }
+
+ .login-btn:hover {
+   background-position: right center; 
+   color: #fff;
+   text-decoration: none;
+ } */
+
+ 
+ .start-now-btn {background-image: linear-gradient(to right, #00c6ff 0%, #0072ff  51%, #00c6ff  100%)}
+ .start-now-btn {
+    margin: 25px;
+    padding: 15px 45px;
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    border-radius: 10px;
+    display: block;
+  }
+
+  .start-now-btn:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
+  }
+ 
+
+
+  .login-btn {background-image: linear-gradient(to right, #ECE9E6 0%, #FFFFFF  51%, #ECE9E6  100%)}
+  .login-btn {
+     margin: 25px;
+     padding: 15px 45px;
+     text-align: center;
+     transition: 0.5s;
+     background-size: 200% auto;
+     color: black;            
+     border-radius: 10px;
+     display: block;
+   }
+
+   .login-btn:hover {
+     background-position: right center; /* change the direction of the change here */
+     color: black;
+     text-decoration: none;
+   }
+  
