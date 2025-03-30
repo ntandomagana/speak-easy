@@ -1,0 +1,83 @@
+<div class="container p-6 rounded-lg">  
+    <!-- Reactive form binding -->
+    <form [formGroup]="bookingForm" class="max-w-md mx-auto p-6 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-bold text-black mb-4">Book a Lesson</h2>
+        
+        <!-- Select Date -->
+        <label class="block text-black font-semibold mb-1">Select Date</label>
+        <input type="date" formControlName="date" class="w-full p-2 rounded border border-purple-200 mb-4 bg-white">
+        
+        <!-- Select Time -->
+        <label class="block text-black font-semibold mb-1">Select Time</label>
+        <input type="time" formControlName="time" class="w-full p-2 rounded border border-purple-200 mb-4 bg-white">
+        
+        <!-- Select Lesson Type -->
+        <label class="block text-black font-semibold mb-1">Lesson Type</label>
+        <select formControlName="lessonType" class="w-full p-2 rounded border border-purple-200 mb-4 ">
+          <option value="grammar">Grammar</option>
+          <option value="writing">Writing</option>
+          <option value="conversational">Conversational</option>
+        </select>
+        
+        <!-- Select Level -->
+        <label class="block text-black font-semibold mb-1">Level</label>
+        <select formControlName="level" class="w-full p-2 rounded border border-purple-200 mb-6 ">
+          <option value="beginner">Beginner</option>
+          <option value="intermediate">Intermediate</option>
+          <option value="advanced">Advanced</option>
+        </select>
+        
+        <!-- Confirm Button -->
+        <button type="submit" 
+        (click)="confirmBooking()"
+        class="w-full p-3 rounded bg-black text-white font-bold hover:bg-white hover:text-black hover:border-black border transition-all">
+          Confirm Booking
+        </button>
+      </form>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div *ngIf="showModal" class="fixed inset-0 flex items-center justify-center backdrop-blur-sm bg-black/30">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
+      <h2 class="text-xl font-bold text-black">Confirm Your Booking</h2>
+      <p class="mt-2">Are you sure you want to book a <strong>{{ bookingData.lessonType }}</strong> lesson with Judas Mohlala for <strong>{{ bookingData.date }}</strong> at <strong>{{ bookingData.time }}</strong> South African Time?</p>
+  
+      <div class="flex justify-center gap-4 mt-4">
+        <button (click)="bookLesson()" class="bg-black text-white px-4 py-2 rounded-lg">
+          Yes, Book
+        </button>
+        <button (click)="closeModal()" class="bg-gray-300 px-4 py-2 rounded-lg">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <div *ngIf="isLoading" class="fixed inset-0 flex items-center justify-center  bg-black/50">
+    <div class="bg-white p-6 rounded-lg text-center">
+      <h2 class="text-xl font-bold">Booking your lesson...</h2>
+      <div class="dot-loader mt-4">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Lesson booked confirmation modal -->
+  <div *ngIf="showConfirmationModal" class="fixed inset-0 flex items-center justify-center backdrop-blur-sm bg-black/30">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
+      <h2 class="text-xl font-bold text-black">Lesson Booked!</h2>
+      <p class="mt-2">We will notify you closer to the lesson start time.</p>
+  
+      <button (click)="closeConfirmationModal()" class="bg-black text-white px-4 py-2 rounded-lg mt-4">
+        Close
+      </button>
+    </div>
+  </div>
+  
+  

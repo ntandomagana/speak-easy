@@ -1,7 +1,7 @@
 
 
 .right-content-img  {
-    width: 650px;
+    object-fit: cover;
 }
 
 

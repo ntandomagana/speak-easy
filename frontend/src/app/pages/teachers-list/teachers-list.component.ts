@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'app-teachers-list',
@@ -8,5 +9,12 @@ import { RouterModule } from '@angular/router';
   styleUrl: './teachers-list.component.css'
 })
 export class TeachersListComponent {
+
+  constructor(private router: Router) {}
+ 
+
+  navigateToBooking() {
+    this.router.navigate(['/book-lesson']);
+  }
 
 }
