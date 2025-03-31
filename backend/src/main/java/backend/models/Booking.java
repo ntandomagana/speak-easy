@@ -41,6 +41,6 @@ public class Booking {
     private boolean isCancelled = false;
 
 
-
-
 }
+
+
