@@ -1,7 +1,6 @@
 export interface Booking {
-    lessonType: string;
+  lessonType: string;
   level: string;
   date: string;
   time: string;
-
 }

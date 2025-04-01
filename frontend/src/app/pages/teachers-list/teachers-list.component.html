@@ -62,5 +62,73 @@
         </div>
       </div>
     </div>
+
+
+
+
+    <div class="main-container border border-gray-300 w-[650px] flex p-5 bg-white rounded-lg shadow-lg">
+      
+      <!-- Teacher Profile Picture -->
+      <div class="teacher-profile-picture flex-shrink-0">
+        <img class="rounded-full object-cover mt-5 h-[120px] w-[120px]" src="teacher-1.jpg" alt="Teacher Profile" />
+      </div>
+
+      <!-- Teacher Details -->
+      <div class="mt-5 ml-5 flex flex-col w-full">
+        
+        <!-- Name & Rating -->
+        <div class="flex items-center justify-between">
+          <h1 class="teacher-name font-bold text-2xl">Teacher Lexi</h1>
+          <div class="teacher-rating flex items-center">
+            <i class="bi bi-star-fill text-yellow-500"></i>
+            <i class="bi bi-star-fill text-yellow-500"></i>
+            <i class="bi bi-star-fill text-yellow-500"></i>
+            <i class="bi bi-star-fill text-yellow-500"></i>
+            <i class="bi bi-star text-gray-400"></i> <!-- Empty star for 4/5 rating -->
+            <span class="ml-2 text-gray-600">(4.0)</span>
+          </div>
+        </div>
+
+        <!-- About Teacher -->
+        <div class="about-teacher-section mt-3 text-gray-700">
+          <p>I'm Judas, a qualified ESL teacher with 3 years of experience. I teach all levels, from beginner to advanced. I am from South Africa and a native English speaker.</p>
+        </div>
+
+        <!-- Location & Extra Info -->
+        <div class="teacher-details flex flex-wrap gap-4 mt-3 text-gray-600">
+          <div class="flex gap-2">
+            <i class="bi bi-geo-alt-fill"></i>
+            <p>South Africa</p>
+          </div>
+          <div class="flex gap-2">
+            <i class="bi bi-globe"></i>
+            <p>Teaches: English</p>
+          </div>
+          <div class="flex gap-2">
+            <i class="bi bi-people"></i>
+            <p>Students: 25+</p>
+          </div>
+          <div class="flex gap-2">
+            <i class="bi bi-cash"></i>
+            <p>$15 / lesson</p>
+          </div>
+          <div class="flex gap-2">
+            <i class="bi bi-clock"></i>
+            <p>Available: Mon-Fri</p>
+          </div>
+        </div>
+
+        <!-- Buttons: Book & View Profile -->
+        <div class="flex items-center gap-5 mt-4">
+          <button (click)="navigateToBooking()" class="font-bold text-white p-2 bg-black border border-black hover:bg-white hover:text-black hover:border-black hover:cursor rounded-lg shadow-md transition duration-300">
+            Book a Lesson
+          </button>
+          <a href="teacher-profile.html" class="text-black font-bold hover:underline">View Profile</a>
+        </div>
+      </div>
+    </div>
+
+
+
   </div>
 </body>
