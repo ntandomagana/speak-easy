@@ -3,6 +3,7 @@ import { TeachersListComponent } from './pages/teachers-list/teachers-list.compo
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { BookLessonComponent } from './components/book-lesson/book-lesson.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { LoginComponent } from './components/login/login.component';
 
 export const routes: Routes = [
     {
@@ -21,5 +22,9 @@ export const routes: Routes = [
     {
         path: 'signup',
         component: SignupComponent
+    },
+    {
+        path: 'login',
+        component: LoginComponent
     }
 ];
