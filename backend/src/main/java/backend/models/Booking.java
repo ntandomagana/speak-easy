@@ -38,7 +38,6 @@ public class Booking {
     @Column(nullable = false)
     private boolean isCancelled = false;
 
-
     public Long getId() {
         return id;
     }
