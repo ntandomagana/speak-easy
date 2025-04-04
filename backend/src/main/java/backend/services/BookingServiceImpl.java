@@ -41,11 +41,11 @@ public class BookingServiceImpl implements BookingService {
         Optional<Student> optionalStudent = studentRepository.findById(student.getId());
 
         // if-statements
-        if (optionalTeacher.isEmpty()) {
+        if (optionalTeacher.isPresent()) {
             throw new RuntimeException("Teacher is not existent");
         }
 
-        if (optionalStudent.isEmpty()) {
+        if (optionalStudent.isPresent()) {
             throw new RuntimeException("Student is not existent");
         }
 

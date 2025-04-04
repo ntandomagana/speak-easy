@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/bookings")
+@RequestMapping("api/v1/bookings")
 public class BookingController {
     private final BookingServiceImpl bookingService;
 
@@ -25,4 +25,6 @@ public class BookingController {
         BookingDTO dto1 = bookingService.createBooking(booking.getTeacher(), booking.getStudent(), booking);
         return ResponseEntity.ok(dto1);
     }
+
 }
+

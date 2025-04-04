@@ -12,21 +12,12 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class BookingDTO {
-    private Long id;
     private Teacher teacher;
     private Student student;
     private LessonType lessonType;
     private Level level;
     private LocalDateTime lessonDateTime;
     private boolean isCancelled = false;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Teacher getTeacher() {
         return teacher;
