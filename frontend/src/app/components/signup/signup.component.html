@@ -1,51 +1,71 @@
 <body class="h-screen w-full flex">
-    
-    <!-- Left Section: Signup Form -->
-    <div class="w-1/2 flex items-center justify-center p-12 bg-white">
-        <div class="w-full max-w-md">
-            <h1 class="text-center text-3xl font-bold text-gray-900">Speak<span class="text-purple-400">E</span>asy</h1>
-            <h2 class="mt-5 text-center text-xl font-bold tracking-tight text-gray-900">Create your account</h2>
+  <!-- Left Section: Signup Form -->
+  <div class="w-1/2 flex items-center justify-center p-12 bg-white">
+      <div class="w-full max-w-md">
+          <h1 class="text-center text-3xl font-bold text-gray-900">Speak<span class="text-purple-400">E</span>asy</h1>
+          <h2 class="mt-5 text-center text-xl font-bold tracking-tight text-gray-900">Create your account</h2>
+          <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="space-y-6 mt-6">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-900">Full Name</label>
+              <input type="text" formControlName="name" id="name" required class="label-input mt-2 w-full p-3 border rounded-md">
+              <!-- Full Name Validation Errors -->
+              <div *ngIf="signupForm.get('name')?.touched && signupForm.get('name')?.invalid" class="text-red-500 text-sm">
+                <div *ngIf="signupForm.get('name')?.errors?.['required']">Name is required.</div>
+                <div *ngIf="signupForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters long.</div>
+              </div>
+            </div>
+          
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-900">Email address</label>
+              <input type="email" formControlName="email" id="email" required class="label-input mt-2 w-full p-3 border rounded-md">
+              <!-- Email Validation Errors -->
+              <div *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid" class="text-red-500 text-sm">
+                <div *ngIf="signupForm.get('email')?.errors?.['required']">Email is required.</div>
+                <div *ngIf="signupForm.get('email')?.errors?.['email']">Please enter a valid email.</div>
+              </div>
+            </div>
+          
+            <div>
+              <label for="password" class="block text-sm font-medium text-gray-900">Password</label>
+              <input type="password" formControlName="password" id="password" required class="label-input mt-2 w-full p-3 border rounded-md">
+              <!-- Password Validation Errors -->
+              <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid" class="text-red-500 text-sm">
+                <div *ngIf="signupForm.get('password')?.errors?.['required']">Password is required.</div>
+                <div *ngIf="signupForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</div>
+              </div>
+            </div>
+          
+            <div>
+              <button type="submit" class="w-full p-3 bg-purple-400 text-white font-semibold rounded-md hover:bg-purple-500">
+                Sign Up
+              </button>
+            </div>
+          
+            <div class="flex justify-end">
+              <a routerLink="/login" class="text-purple-500 hover:text-purple-700">Login here</a>
+            </div>
+          </form>
+          
+          
             
-            <form class="space-y-6 mt-6" [formGroup]="signupForm" action="#" method="POST">
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-900">Full Name</label>
-                    <input type="text" name="name" id="name" required class="label-input mt-2 w-full p-3 border rounded-md">
-                </div>
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-900">Email address</label>
-                    <input type="email" name="email" id="email" required class="label-input mt-2 w-full p-3 border rounded-md">
-                </div>
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-900">Password</label>
-                    <input type="password" name="password" id="password" required class="label-input mt-2 w-full p-3 border rounded-md">
-                </div>
-                <div>
-                    <button type="submit" 
-                    (click)="onSubmit()"
-                    class="w-full p-3 bg-purple-400 text-white font-semibold rounded-md hover:bg-purple-500">
-                        Sign Up
-                    </button>
-                </div>
-                <div class="flex justify-end">
-                    <a [routerLink]="'/login'" class="text-purple-500 hover:text-purple-700">Login in here</a>
-                </div>
-            </form>
-        </div>
-    </div>
+      </div>
+  </div>
 
-    <div class="w-1/2 bg-cover object-cover bg-center hidden lg:block" style="background-image: url('online-teacher.png');"></div>
+  <div class="w-1/2 bg-cover object-cover bg-center hidden lg:block" style="background-image: url('online-teacher.png');"></div>
 
-
-    <div *ngIf="isLoading" class="fixed inset-0 flex items-center justify-center  bg-black/50">
-        <div class="bg-white p-6 rounded-lg text-center">
+  <div *ngIf="isLoading" class="fixed inset-0 flex items-center justify-center bg-black/50">
+      <div class="bg-white p-6 rounded-lg text-center">
           <h2 class="text-xl font-bold">Creating your account</h2>
           <div class="dot-loader mt-4">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
           </div>
-        </div>
       </div>
+  </div>
+</body>
+
+
       
       <!-- Lesson booked confirmation modal -->
       <!-- <div *ngIf="showConfirmationModal" class="fixed inset-0 flex items-center justify-center backdrop-blur-sm bg-black/30">
@@ -58,5 +78,3 @@
           </button>
         </div>
       </div> -->
-
-</body>
