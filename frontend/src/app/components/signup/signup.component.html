@@ -63,6 +63,17 @@
           </div>
       </div>
   </div>
+
+   <!-- Success Modal (shows when signup is successful) -->
+   <div *ngIf="showSuccessModal" class="fixed inset-0 flex items-center justify-center backdrop-blur-sm bg-black/30">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
+      <h2 class="text-xl font-bold text-black">Successfully Signed Up!</h2>
+      <p class="mt-2">You can now log in and start using the app.</p>
+      <button (click)="goToHomepage()" class="bg-purple-500 text-white px-4 py-2 rounded-lg mt-4">
+        Go to Homepage
+      </button>
+    </div>
+  </div>
 </body>
 
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router'; // Import Router
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -12,9 +13,11 @@ import { RouterLink } from '@angular/router';
 export class SignupComponent implements OnInit {
 
   isLoading = false;
+  showSuccessModal = false; 
   signupForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) { // Inject Router
+
     this.signupForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
@@ -26,12 +29,20 @@ export class SignupComponent implements OnInit {
 
   onSubmit() {
     if (this.signupForm.valid) {
-      alert('You successfully signed up!');
+      this.isLoading = true; 
       console.log(this.signupForm.value);
+
+      setTimeout(() => {
+        this.isLoading = false; 
+        this.showSuccessModal = true; 
+      }, 2000); 
     } else {
       console.log('Form is invalid');
     }
   }
 
-  
+  goToHomepage() {
+    this.showSuccessModal = false;
+    this.router.navigate(['/']); 
+  }
 }
