@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 
+@Entity
 public class Teacher extends User {
 
     @Column(length = 1000)

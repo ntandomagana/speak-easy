@@ -15,14 +15,21 @@ export class SignupComponent implements OnInit {
   isLoading = false;
   showSuccessModal = false; 
   signupForm: FormGroup;
+  role: string = 'student';
 
-  constructor(private fb: FormBuilder, private router: Router) { // Inject Router
+  constructor(private fb: FormBuilder, private router: Router) { 
 
     this.signupForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      role: [this.role, Validators.required], 
     });
+  }
+
+  toggleRole(role: string): void {
+    this.role = role;
+    this.signupForm.get('role')?.setValue(role);  
   }
 
   ngOnInit(): void {}

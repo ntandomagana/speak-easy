@@ -48,6 +48,7 @@ export class BookLessonComponent implements OnInit {
   closeModal() {
     this.showModal = false;
   }
+  
 
   bookLesson() {
     this.isLoading = true;
