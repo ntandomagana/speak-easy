@@ -34,18 +34,18 @@ public class BookingServiceImpl implements BookingService {
 
 
     @Override
-    public BookingDTO createBooking(Teacher teacher, Student student, Booking booking) {
+    public BookingDTO createBooking(Long teacherId, Long studentId, Booking booking) {
         // find the teacher
-        Optional<Teacher> optionalTeacher =  teacherRepository.findById(teacher.getId());
+        Optional<Teacher> optionalTeacher =  teacherRepository.findById(teacherId);
         // find the student
-        Optional<Student> optionalStudent = studentRepository.findById(student.getId());
+        Optional<Student> optionalStudent = studentRepository.findById(studentId);
 
         // if-statements
-        if (optionalTeacher.isPresent()) {
+        if (optionalTeacher.isEmpty()) {
             throw new RuntimeException("Teacher is not existent");
         }
 
-        if (optionalStudent.isPresent()) {
+        if (optionalStudent.isEmpty()) {
             throw new RuntimeException("Student is not existent");
         }
 
@@ -58,8 +58,11 @@ public class BookingServiceImpl implements BookingService {
 
         bookingRepository.save(booking);
 
-        BookingDTO dto = EntityToDTO(booking);
-        return dto;
+        return EntityToDTO(booking);
+
+//
+//        BookingDTO dto = EntityToDTO(booking);
+//        return dto;
     }
 
     @Override
@@ -79,8 +82,8 @@ public class BookingServiceImpl implements BookingService {
 
     BookingDTO EntityToDTO(Booking booking) {
         BookingDTO dto = new BookingDTO();
-        dto.setTeacher(booking.getTeacher());
-        dto.setStudent(booking.getStudent());
+        dto.setTeacherId(booking.getTeacher().getId());
+        dto.setStudentId(booking.getStudent().getId());
         dto.setLessonType(booking.getLessonType());
         dto.setLevel(booking.getLevel());
         dto.setLessonDateTime(booking.getLessonDateTime());
