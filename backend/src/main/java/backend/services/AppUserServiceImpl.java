@@ -1,0 +1,5 @@
+@Service
+public class AppUserServiceImpl {
+
+
+}

@@ -2,12 +2,10 @@ package backend.models;
 
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 
 @Entity
-public class Teacher extends User {
+public class Teacher extends AppUser {
 
     @Column(length = 1000)
     private String bio;

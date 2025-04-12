@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User {
+public class AppUser {
     @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
@@ -16,7 +16,7 @@ public class User {
         @Column(nullable = false)
         private String lastName;
 
-        @Column(nullable = false)
+        @Column(nullable = false, unique = true)
         private String email;
 
         @Column(nullable = false)
@@ -27,9 +27,6 @@ public class User {
         @Column(nullable = false)
 
         private Role role;
-
-//    @OneToMany(mappedBy = "teacher")
-//    private Set<Booking> listOfBookings;
 
 
     public Long getId() {
