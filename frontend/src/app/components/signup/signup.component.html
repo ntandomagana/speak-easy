@@ -12,12 +12,12 @@
               <!-- <label for="role" class="text-sm font-medium text-gray-900 mb-2"></label> -->
             
               <!-- Role Selection Container -->
-              <div class="flex items-center space-x-8 border-2 border-purple-400 rounded-lg p-1">
+              <div class="flex items-center space-x-8 border-2 border-purple-400">
                 <div 
                   (click)="toggleRole('student')" 
                   [class.bg-purple-400]="role === 'student'" 
                   [class.bg-white]="role !== 'student'" 
-                  class="cursor-pointer w-28 h-12 flex items-center justify-center rounded-lg text-purple-700 font-semibold text-lg transition-all duration-300">
+                  class="cursor-pointer w-28 h-12 flex items-center justify-center text-purple-700 font-semibold text-lg transition-all duration-300">
                   Student
                 </div>
                 
@@ -25,7 +25,7 @@
                   (click)="toggleRole('teacher')" 
                   [class.bg-purple-400]="role === 'teacher'" 
                   [class.bg-white]="role !== 'teacher'" 
-                  class="cursor-pointer w-28 h-12 flex items-center justify-center rounded-lg text-purple-700 font-semibold text-lg transition-all duration-300">
+                  class="cursor-pointer w-28 h-12 flex items-center justify-center text-purple-700 font-semibold text-lg transition-all duration-300">
                   Teacher
                 </div>
               </div>
@@ -34,7 +34,9 @@
             
             <div>
               <label for="name" class="block text-sm font-medium text-gray-900">Full Name</label>
-              <input type="text" formControlName="name" id="name" required class="label-input mt-2 w-full p-3 border rounded-md">
+              <input type="text" formControlName="name" id="name"
+              placeholder="Sam Joe"
+               required class="label-input mt-2 w-full p-3 border rounded-md">
               <!-- Full Name Validation Errors -->
               <div *ngIf="signupForm.get('name')?.touched && signupForm.get('name')?.invalid" class="text-red-500 text-sm">
                 <div *ngIf="signupForm.get('name')?.errors?.['required']">Name is required.</div>
@@ -44,7 +46,9 @@
           
             <div>
               <label for="email" class="block text-sm font-medium text-gray-900">Email address</label>
-              <input type="email" formControlName="email" id="email" required class="label-input mt-2 w-full p-3 border rounded-md">
+              <input type="email" formControlName="email"
+              placeholder="example@gmail.com"
+               id="email" required class="label-input mt-2 w-full p-3 border rounded-md">
               <!-- Email Validation Errors -->
               <div *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid" class="text-red-500 text-sm">
                 <div *ngIf="signupForm.get('email')?.errors?.['required']">Email is required.</div>

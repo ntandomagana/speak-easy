@@ -3,7 +3,6 @@ package backend.controllers;
 import backend.dtos.BookingDTO;
 import backend.models.Booking;
 import backend.services.BookingService;
-import backend.services.BookingServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,14 +17,8 @@ public class BookingController {
     }
 
     @PostMapping
-    public ResponseEntity<BookingDTO> createBooking(
-            @RequestParam Long teacherId,
-            @RequestParam Long studentId,
-            @RequestBody Booking booking
-    ) {
-        BookingDTO dto = bookingService.createBooking(teacherId, studentId, booking);
+    public ResponseEntity<BookingDTO> createBooking(@RequestBody BookingDTO bookingDTO) {
+        BookingDTO dto = bookingService.createBooking(bookingDTO);
         return ResponseEntity.ok(dto);
     }
-
-}
-
+    }

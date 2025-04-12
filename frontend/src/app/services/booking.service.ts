@@ -9,11 +9,18 @@ import { Observable } from 'rxjs';
 })
 export class BookingService {
 
-  private apiUrl = environment.SERVER + 'api/v1';
+  private apiUrl = environment.SERVER + 'api/v1/bookings';
 
   constructor(private http: HttpClient) { }
 
   createBooking(booking: Booking): Observable<any> {
-    return this.http.post(this.apiUrl + '/bookings', booking)
+    return this.http.post(this.apiUrl, {
+      teacherId: booking.teacherId,
+      studentId: booking.studentId,
+      lessonType: booking.lessonType,        
+      level: booking.level,                  
+      lessonDateTime: booking.lessonDateTime,
+      cancelled: booking.cancelled
+    });
   }
 }

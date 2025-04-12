@@ -6,6 +6,31 @@ import jakarta.persistence.*;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
+    @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
+
+        @Column(nullable = false)
+        private String name;
+
+        @Column(nullable = false)
+        private String lastName;
+
+        @Column(nullable = false)
+        private String email;
+
+        @Column(nullable = false)
+        private String password;
+
+
+        @Enumerated(EnumType.STRING)
+        @Column(nullable = false)
+
+        private Role role;
+
+//    @OneToMany(mappedBy = "teacher")
+//    private Set<Booking> listOfBookings;
+
 
     public Long getId() {
         return id;
@@ -54,35 +79,6 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
-
-    @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
-
-        @Column(nullable = false)
-        private String name;
-
-        @Column(nullable = false)
-        private String lastName;
-
-        @Column(nullable = false)
-        private String email;
-
-        @Column(nullable = false)
-        private String password;
-
-
-        @Enumerated(EnumType.STRING)
-        private Role role;
-
-
-
-
-
-
-//    @OneToMany(mappedBy = "teacher")
-//    private Set<Booking> listOfBookings;
-
 
 
 
