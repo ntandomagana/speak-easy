@@ -1,3 +1,5 @@
+package backend.services;
+
 import backend.dtos.SignupDTO;
 import backend.models.AppUser;
 import backend.repositories.AppUserRepository;
@@ -6,27 +8,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AppUserServiceImpl implements AppUserService {
+public class AppUserServiceImpl   {
 
-private final AppUserRepository appUserRepository;
-
-@Autowired
-    public AppUserServiceImpl(AppUserRepository appUserRepository) {
-    this.appUserRepository = appUserRepository;
-}
-
-@Override
-    public AppUser registerUser(SignupDTO dto) {
-    AppUser user = new AppUser();
-
-    user.setName(dto.getName());
-    user.setEmail(dto.getEmail());
-    user.setPassword(dto.getPassword());
-    user.setRole(dto.getRole());
-
-    return appUserRepository.save(user);
-
-}
+//private final AppUserRepository appUserRepository;
+//
+//@Autowired
+//    public AppUserServiceImpl(AppUserRepository appUserRepository) {
+//    this.appUserRepository = appUserRepository;
+//}
+//
+//@Override
+//public AppUser registerUser(SignupDTO dto) {
+//    AppUser user = new AppUser();
+//
+//    user.setName(dto.getName());
+//    user.setEmail(dto.getEmail());
+//    user.setPassword(dto.getPassword());
+//    user.setRole(dto.getRole());
+//
+//    return (AppUser) appUserRepository.save(user);
+//
+//}
 
 
 }

@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 
 
 
-@Entity
-public class Student extends AppUser {
+public class Student {
 
 
 

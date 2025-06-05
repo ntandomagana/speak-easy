@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("api/v1/bookings")
 public class BookingController {
-    private final BookingService bookingService;
-
-    public BookingController(BookingService bookingService) {
-        this.bookingService = bookingService;
-    }
-
-    @PostMapping
-    public ResponseEntity<BookingDTO> createBooking(@RequestBody BookingDTO bookingDTO) {
-        BookingDTO dto = bookingService.createBooking(bookingDTO);
-        return ResponseEntity.ok(dto);
-    }
+//    private final BookingService bookingService;
+//
+//    public BookingController(BookingService bookingService) {
+//        this.bookingService = bookingService;
+//    }
+//
+//    @PostMapping
+//    public ResponseEntity<BookingDTO> createBooking(@RequestBody BookingDTO bookingDTO) {
+//        BookingDTO dto = bookingService.createBooking(bookingDTO);
+//        return ResponseEntity.ok(dto);
+//    }
     }

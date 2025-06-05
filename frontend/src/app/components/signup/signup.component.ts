@@ -44,12 +44,13 @@ export class SignupComponent implements OnInit {
         this.showSuccessModal = true; 
       }, 2000); 
     } else {
+      this.signupForm.markAllAsTouched();
       console.log('Form is invalid');
     }
   }
 
   goToHomepage() {
     this.showSuccessModal = false;
-    this.router.navigate(['/']); 
+    this.router.navigate(['/teachers-list']); 
   }
 }

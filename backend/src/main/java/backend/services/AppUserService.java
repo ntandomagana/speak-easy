@@ -4,8 +4,9 @@ import backend.dtos.SignupDTO;
 import backend.models.AppUser;
 
 public interface AppUserService {
-;
-    AppUser registeruser(SignupDTO appUserDTO)
-    AppUser saveUser(AppUser user);
-    AppUser findByEmail(String email);
+    AppUser registerUser(SignupDTO dto);
+
+//    AppUser registeruser(SignupDTO appUserDTO);
+//    AppUser saveUser(AppUser user);
+//    AppUser findByEmail(String email);
 }
