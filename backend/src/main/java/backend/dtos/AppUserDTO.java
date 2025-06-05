@@ -1,39 +1,13 @@
-package backend.models;
+package backend.dtos;
 
-import jakarta.persistence.*;
+import backend.models.Role;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
+
 @Setter
 @Getter
-public class AppUser {
-    @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
-
-    @Column(nullable = false)
-        private String name;
-
-        @Column(nullable = false, unique = true)
-        private String email;
-
-        @Column(nullable = false)
-        private String password;
-
-        @Enumerated(EnumType.STRING)
-        @Column(nullable = false)
-        private Role role;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+public class AppUserDTO {
     public String getName() {
         return name;
     }
@@ -65,5 +39,10 @@ public class AppUser {
     public void setRole(Role role) {
         this.role = role;
     }
-}
 
+    private String name;
+    private String email;
+    private String password;
+    private Role role;
+
+}
