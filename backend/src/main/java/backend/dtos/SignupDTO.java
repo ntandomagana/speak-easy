@@ -2,7 +2,7 @@ package backend.dtos;
 
 import backend.models.Role;
 
-public class SignupDTO {
+public class AppUserDTO {
 //    private String name;
 //    private String lastName;
 //    private String email;
