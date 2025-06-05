@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { BookingService } from '../../services/booking.service';
+import { BookingService } from '../../../services/booking.service';
 
 @Component({
   selector: 'app-book-lesson',
