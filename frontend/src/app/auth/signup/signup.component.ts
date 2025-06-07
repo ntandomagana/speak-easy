@@ -3,6 +3,7 @@ import { FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angula
 import { Router } from '@angular/router'; // Import Router
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -17,13 +18,15 @@ export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   role: string = 'student';
 
-  constructor(private fb: FormBuilder, private router: Router) { 
+  constructor(private fb: FormBuilder,
+     private router: Router,
+     private authService: AuthService) { 
 
     this.signupForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      role: [this.role, Validators.required], 
+      role: ['STUDENT', [Validators.required]]
     });
   }
 
@@ -38,6 +41,23 @@ export class SignupComponent implements OnInit {
     if (this.signupForm.valid) {
       this.isLoading = true; 
       console.log(this.signupForm.value);
+
+      const payload = this.signupForm.value;
+      console.log('Payload sent to backend:', payload);
+
+      this.authService.signup(payload).subscribe({
+        next: (response) => {
+          console.log('Signup successful', response);
+          this.isLoading = false; 
+          this.showSuccessModal = true; 
+          this.signupForm.reset();
+        },
+         error: (err) => {
+        this.isLoading = false;
+        console.error('Signup error:', err); 
+         }
+        })
+      
 
       setTimeout(() => {
         this.isLoading = false; 

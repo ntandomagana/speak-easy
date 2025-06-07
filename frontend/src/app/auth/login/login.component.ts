@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class LoginComponent {
     isLoading = false;
 
     constructor(private fb: FormBuilder, 
-      private router: Router
+      private router: Router,
+      private authService: AuthService
     ) {
       this.loginForm = this.fb.group({
          email: ['', [Validators.required, Validators.email]],
@@ -36,6 +38,23 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.isLoading = true; 
       console.log(this.loginForm.value);
+
+      const payload = this.loginForm.value;
+      console.log('Payload sent to backend:', payload);
+
+      this.authService.login(payload).subscribe({
+        next: (response) => {
+          console.log('Login successful', response);
+          this.isLoading = false; 
+          this.showSuccessModal = true; 
+          this.loginForm.reset();
+          this.router.navigate(['/teachers-list']);
+        },
+        error: (err) => {
+          this.isLoading = false;
+          console.error('Login error:', err); 
+        }
+      })
 
       setTimeout(() => {
         this.isLoading = false; 

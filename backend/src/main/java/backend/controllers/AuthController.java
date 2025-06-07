@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 
 public class AuthController {
     private final AppUserService appUserService;
@@ -21,6 +21,8 @@ public class AuthController {
 
     @PostMapping("/signup")
     public AppUser signup(@RequestBody AppUserDTO dto) {
+        System.out.println("Received signup payload: " + dto);
+
         return appUserService.registerUser(dto);
     }
 
