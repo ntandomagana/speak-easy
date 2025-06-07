@@ -20,6 +20,11 @@ export const routes: Routes = [
         component: BookLessonComponent
     },
     {
+        path: 'book-lesson/:id',
+        component: BookLessonComponent
+
+    },
+    {
         path: 'signup',
         component: SignupComponent
     },

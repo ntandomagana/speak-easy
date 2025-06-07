@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { BookingService } from '../../../services/booking.service';
+import { BookingPayload } from '../../../types/booking';
 
 @Component({
   selector: 'app-book-lesson',
@@ -16,16 +17,29 @@ import { BookingService } from '../../../services/booking.service';
 })
 export class BookLessonComponent implements OnInit {
   bookingForm!: FormGroup;
-  bookingData: any;
+  bookingData!: BookingPayload;
   showModal = false;
   showConfirmationModal = false;
   isLoading = false;
+  teacherId!: string;
+  studentId!: string;
 
   constructor(private fb: FormBuilder,
     private bookingService: BookingService,
   ) {}
 
   ngOnInit(): void {
+
+    const userInfo = JSON.parse(localStorage.getItem('loggedInUserInfo') || '{}');
+
+    if (userInfo.role !== 'student') {
+      alert('You must be logged in as a student to book a lesson.');
+      return;
+
+       this.teacherId = this.route.snapshot.paramMap.get('teacherId') || '';
+  this.studentId = userInfo.id;
+
+
     this.bookingForm = this.fb.group({
       lessonType: ['', Validators.required],
       level: ['', Validators.required],
@@ -36,9 +50,24 @@ export class BookLessonComponent implements OnInit {
 
   confirmBooking() {
     if (this.bookingForm.valid) {
-      this.bookingData = this.bookingForm.value;
+
+      const formValues = this.bookingForm.value;
+      const lessonDateTime = `${formValues.date}T${formValues.time}:00`;
+
+      const userInfo = JSON.parse(localStorage.getItem('loggedInUserInfo') || '{}');
+      const studentId = userInfo.id || '';
+      
+      this.bookingData = {
+        teacherId: this.teacherId,
+        studentId: studentId,
+        lessonType: formValues.lessonType,
+        level: formValues.level,
+        lessonDateTime: lessonDateTime,
+        // cancelled: false // Assuming you want to set this to false by default
+      }
+
       this.showModal = true;
-      console.log(this.bookingForm.value);
+      console.log('booking data', this.bookingForm.value);
     } else {
       alert('Please fill in all fields.');
       console.log('Form is invalid');
