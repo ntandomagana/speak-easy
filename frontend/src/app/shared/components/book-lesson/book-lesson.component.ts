@@ -36,8 +36,8 @@ export class BookLessonComponent implements OnInit {
       alert('You must be logged in as a student to book a lesson.');
       return;
 
-       this.teacherId = this.route.snapshot.paramMap.get('teacherId') || '';
-  this.studentId = userInfo.id;
+  //      this.teacherId = this.route.snapshot.paramMap.get('teacherId') || '';
+  // this.studentId = userInfo.id;
 
 
     this.bookingForm = this.fb.group({
@@ -47,6 +47,7 @@ export class BookLessonComponent implements OnInit {
       time: ['', Validators.required],
     });
   }
+}
 
   confirmBooking() {
     if (this.bookingForm.valid) {
@@ -63,7 +64,7 @@ export class BookLessonComponent implements OnInit {
         lessonType: formValues.lessonType,
         level: formValues.level,
         lessonDateTime: lessonDateTime,
-        // cancelled: false // Assuming you want to set this to false by default
+        // cancelled: false 
       }
 
       this.showModal = true;
@@ -108,4 +109,6 @@ export class BookLessonComponent implements OnInit {
   closeConfirmationModal() {
     this.showConfirmationModal = false;
   }
+
 }
+

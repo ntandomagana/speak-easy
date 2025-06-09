@@ -25,13 +25,16 @@ export class LoginComponent {
       this.loginForm = this.fb.group({
          email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      // role: [this.role.toUpperCase()]
      });
 
   }
 
   toggleRole(role: string): void {
-    this.role = this.role === 'student' ? 'teacher' : 'student';
-    this.loginForm.get('role')?.setValue(this.role); 
+    this.role = role;
+    this.loginForm.get('role')?.setValue(role.toUpperCase());
+    // this.role = this.role === 'student' ? 'teacher' : 'student';
+    // this.loginForm.get('role')?.setValue(this.role); 
   }
 
   onSubmit() {
@@ -40,6 +43,8 @@ export class LoginComponent {
       console.log(this.loginForm.value);
 
       const payload = this.loginForm.value;
+
+      payload.role = this.role.toUpperCase(); 
       console.log('Payload sent to backend:', payload);
 
       this.authService.login(payload).subscribe({
@@ -49,6 +54,18 @@ export class LoginComponent {
           this.showSuccessModal = true; 
           this.loginForm.reset();
           this.router.navigate(['/teachers-list']);
+
+          //store user information in localStorage
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('role', response.role);
+          localStorage.setItem('loggedInUserInfo', JSON.stringify(response.userInfo));
+          localStorage.setItem('userId', response.userInfo.id);
+
+          if (response.role === 'TEACHER') {
+            this.router.navigate(['/teacher-dashboard']);
+          } else {
+            this.router.navigate(['/teachers-list']);
+          }
         },
         error: (err) => {
           this.isLoading = false;

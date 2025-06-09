@@ -1,26 +1,54 @@
 <nav class="navbar fixed top-0 w-full bg-gray-800 text-white shadow-lg z-50">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-      <a [routerLink]="'/'" class="flex items-center space-x-3">
-          <span class="self-center text-2xl font-semibold whitespace-nowrap">Speak<span class="text-purple-400">E</span>asy</span>
-      </a>
+    <!-- Logo -->
+    <a [routerLink]="'/'" class="flex items-center space-x-3">
+      <span class="self-center text-2xl font-semibold whitespace-nowrap">
+        Speak<span class="text-purple-400">E</span>asy
+      </span>
+    </a>
 
-      <div class="flex md:order-2 space-x-3">
-          <button [routerLink]="'/signup'" type="button" class="start-now-btn">Start now</button>
-          <button [routerLink]="'/login'" type="button" class="login-btn">Login</button>
-      </div>
+    <!-- Right side: Login/Signup or User Info -->
+    <div class="flex md:order-2 space-x-3 items-center">
+      <!-- Show if NOT logged in -->
+      <ng-container *ngIf="!isLoggedIn; else loggedIn">
+        <button [routerLink]="'/signup'" type="button" class="start-now-btn">
+          Start now
+        </button>
+        <button [routerLink]="'/login'" type="button" class="login-btn">
+          Login
+        </button>
+      </ng-container>
 
-      <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
-          <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 rounded-lg md:space-x-8 md:flex-row md:mt-0">
-              <li>
-                  <a [routerLink]="'/'" class="nav-link">Home</a>
-              </li>
-              <li>
-                  <a [routerLink]="'/teachers-list'" class="nav-link">Find a Teacher</a>
-              </li>
-              <li>
-                  <a [routerLink]="'/courses'" class="nav-link">Courses</a>
-              </li>
-          </ul>
-      </div>
+      <!-- Show if logged in -->
+      <ng-template #loggedIn>
+        <span class="font-medium hidden sm:inline">Hi, {{ userRole?.toLowerCase() }}</span>
+        <button (click)="logout()" type="button" class="login-btn">
+          Logout
+        </button>
+      </ng-template>
+    </div>
+
+    <!-- Middle nav links -->
+    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
+      <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 rounded-lg md:space-x-8 md:flex-row md:mt-0">
+        <li>
+          <a [routerLink]="'/'" class="nav-link">Home</a>
+        </li>
+        <li>
+          <a [routerLink]="'/teachers-list'" class="nav-link">Find a Teacher</a>
+        </li>
+        <li>
+          <a [routerLink]="'/courses'" class="nav-link">Courses</a>
+        </li>
+
+        <!-- Optional: Role-based nav link -->
+        <li *ngIf="userRole === 'TEACHER'">
+          <a [routerLink]="'/teacher-dashboard'" class="nav-link">Dashboard</a>
+        </li>
+        <li *ngIf="userRole === 'STUDENT'">
+          <a [routerLink]="'/student-dashboard'" class="nav-link">My Lessons</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>

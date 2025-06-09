@@ -21,5 +21,26 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/login`, payload);
   }
 
+  getUserRole(): string | null {
+  return localStorage.getItem('role');
+}
+
+isStudent(): boolean {
+  return this.getUserRole() === 'STUDENT';
+}
+
+isTeacher(): boolean {
+  return this.getUserRole() === 'TEACHER';
+}
+
+isLoggedIn(): boolean {
+  return !!localStorage.getItem('token');
+}
+
+logout(): void {
+  localStorage.clear();
+}
+
+
 
 }

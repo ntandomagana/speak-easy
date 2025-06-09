@@ -69,6 +69,8 @@ export class SignupComponent implements OnInit {
     }
   }
 
+  
+
   goToHomepage() {
     this.showSuccessModal = false;
     this.router.navigate(['/teachers-list']); 
