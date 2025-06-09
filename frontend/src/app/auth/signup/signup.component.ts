@@ -30,12 +30,13 @@ export class SignupComponent implements OnInit {
     });
   }
 
+    ngOnInit(): void {}
+
+
   toggleRole(role: string): void {
     this.role = role;
     this.signupForm.get('role')?.setValue(role);  
   }
-
-  ngOnInit(): void {}
 
   onSubmit() {
     if (this.signupForm.valid) {
@@ -50,7 +51,16 @@ export class SignupComponent implements OnInit {
           console.log('Signup successful', response);
           this.isLoading = false; 
           this.showSuccessModal = true; 
+
+          //save user information in localStorage
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('role', response.role);
+          localStorage.setItem('loggedInUserInfo', JSON.stringify(payload));
+          localStorage.setItem('userId', response.userInfo.id);
+
+          //reset the form after saving the values
           this.signupForm.reset();
+
         },
          error: (err) => {
         this.isLoading = false;
