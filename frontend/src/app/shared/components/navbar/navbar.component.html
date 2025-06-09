@@ -23,7 +23,7 @@
 
       <!-- Logged In -->
       <ng-template #loggedIn>
-        <span class="font-medium hidden sm:inline">Hi, {{ getUserRole()?.toLowerCase() }}</span>
+        <span class="font-medium hidden sm:inline">Hi, {{ loggedInUserName }}</span>
         <button (click)="logout()" type="button" class="login-btn">
           Logout
         </button>
