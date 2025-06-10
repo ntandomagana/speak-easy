@@ -30,9 +30,16 @@ export class BookLessonComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.bookingForm = this.fb.group({
+      lessonType: ['', Validators.required],
+      level: ['', Validators.required],
+      date: ['', Validators.required],
+      time: ['', Validators.required],
+    });
+
     const userInfo = JSON.parse(localStorage.getItem('loggedInUserInfo') || '{}');
 
-    if (userInfo.role !== 'student') {
+    if (userInfo.role !== 'STUDENT') {
       alert('You must be logged in as a student to book a lesson.');
       return;
 
@@ -40,12 +47,7 @@ export class BookLessonComponent implements OnInit {
   // this.studentId = userInfo.id;
 
 
-    this.bookingForm = this.fb.group({
-      lessonType: ['', Validators.required],
-      level: ['', Validators.required],
-      date: ['', Validators.required],
-      time: ['', Validators.required],
-    });
+    
   }
 }
 

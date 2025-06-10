@@ -3,8 +3,8 @@ package backend.models;
 import jakarta.persistence.*;
 
 
-
-public class Student {
+@Entity
+public class Student extends AppUser {
 
 
 

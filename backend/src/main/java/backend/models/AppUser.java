@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Setter
 @Getter
 public class AppUser {
