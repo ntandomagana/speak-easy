@@ -7,5 +7,7 @@ public interface BookingService {
     BookingDTO createBooking(BookingDTO bookingDTO);
     BookingDTO getBookingById(Long id);
     List<BookingDTO> getAllBookings();
-//    void cancelBooking(Long id);
+    List<BookingDTO> getBookingsByStudentId(Long studentId);
+    List<BookingDTO> getBookingsByTeacherId(Long teacherId);
+    BookingDTO cancelBooking(Long id);
 }

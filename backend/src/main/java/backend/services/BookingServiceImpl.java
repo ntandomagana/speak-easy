@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BookingServiceImpl implements BookingService {
@@ -61,13 +62,31 @@ public class BookingServiceImpl implements BookingService {
         return List.of();
     }
 
-//    @Override
-//    public void cancelBooking(Long bookingId) {
-//        Booking booking = bookingRepository.findById(bookingId)
-//                .orElseThrow(() -> new RuntimeException("Booking not found with id: " + bookingId));
-//        booking.setCancelled(true);
-//        bookingRepository.save(booking);
-//    }
+    @Override
+    public BookingDTO cancelBooking(Long bookingId) {
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new RuntimeException("Booking not found with id: " + bookingId));
+        booking.setCancelled(true);
+        Booking updatedBooking = bookingRepository.save(booking);
+
+        return convertToDTO(booking);
+    }
+
+    @Override
+    public List<BookingDTO> getBookingsByStudentId(Long studentId) {
+        List<Booking> bookings = bookingRepository.findByStudentId(studentId);
+        return bookings.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BookingDTO> getBookingsByTeacherId(Long teacherId) {
+        List<Booking> bookings = bookingRepository.findByTeacherId(teacherId);
+        return bookings.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
 
     private BookingDTO convertToDTO(Booking booking) {
         BookingDTO dto = new BookingDTO();
