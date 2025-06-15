@@ -46,7 +46,7 @@ export class SignupComponent implements OnInit {
 
 
       const formValues = this.signupForm.value;
-      console.log('Payload sent to backend:', formValues);
+      console.log('Payload sent to backend:', this.signupForm.value);
 
       this.authService.signup(formValues).subscribe({
         next: (response) => {
@@ -58,7 +58,7 @@ export class SignupComponent implements OnInit {
           localStorage.setItem('token', response.token);
           localStorage.setItem('role', response.role);
           localStorage.setItem('loggedInUserInfo', JSON.stringify(formValues));
-          localStorage.setItem('userId', response.userInfo.id);
+          // localStorage.setItem('userId', response.loggedInUserInfo.id);
 
           //reset the form after saving the values
           this.signupForm.reset();

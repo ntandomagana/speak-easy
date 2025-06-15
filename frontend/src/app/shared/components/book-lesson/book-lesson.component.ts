@@ -31,8 +31,8 @@ export class BookLessonComponent implements OnInit {
   ngOnInit(): void {
 
     this.bookingForm = this.fb.group({
-      lessonType: ['', Validators.required],
-      level: ['', Validators.required],
+      lessonType: ['GRAMMAR', Validators.required],
+      level: ['BEGINNER', Validators.required],
       date: ['', Validators.required],
       time: ['', Validators.required],
     });
