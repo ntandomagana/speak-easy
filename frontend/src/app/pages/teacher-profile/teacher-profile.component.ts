@@ -10,8 +10,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class TeacherProfileComponent implements OnInit {
 
-  profileForm!: FormGroup;
+  teacherProfileForm!: FormGroup;
   profileImageUrl: string | null = null;
+    selectedImageFile: File | null = null;
+
+  showToast = false;
+  toastMessage = '';
 
 
 
@@ -20,7 +24,7 @@ export class TeacherProfileComponent implements OnInit {
   ngOnInit(): void {
     const userInfo = JSON.parse(localStorage.getItem('loggedInUserInfo') || '{}');
 
-    this.profileForm = this.fb.group({
+    this.teacherProfileForm = this.fb.group({
       name: [userInfo.name || '', Validators.required],
       location: ['', Validators.required],
       bio: ['', Validators.required],
@@ -31,12 +35,28 @@ export class TeacherProfileComponent implements OnInit {
   }
 
   saveProfile(): void {
-    if (this.profileForm.valid) {
-      console.log('Teacher Profile:', this.profileForm.value);
-      alert('Profile saved!');
+    if (this.teacherProfileForm.valid) {
+      const profileData = {
+        ...this.teacherProfileForm.value,
+        profileImage: this.selectedImageFile ? this.selectedImageFile.name : 'No image selected'
+      };
+
+      console.log('Profile data to save:', profileData);
+      this.showSuccessToast('Profile saved successfully!');
+      
     } else {
-      this.profileForm.markAllAsTouched();
+      this.showSuccessToast('Please fill in all required fields.');
+      this.teacherProfileForm.markAllAsTouched();
     }
+  }
+
+  showSuccessToast(message: string) {
+    this.toastMessage = message;
+    this.showToast = true;
+
+    setTimeout(() => {
+      this.showToast = false;
+    }, 3000); 
   }
 
   onImageSelected(event: Event): void {

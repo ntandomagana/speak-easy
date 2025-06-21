@@ -2,9 +2,9 @@
   <!-- Header Section -->
   <div class="flex justify-between items-center mb-10">
     <div class="flex flex-col">
-      <h2 class="text-3xl font-bold text-purple-700">{{ profileForm.get('name')?.value }}</h2>
+      <h2 class="text-3xl font-bold text-purple-700">{{ teacherProfileForm.get('name')?.value }}</h2>
       <p class="text-gray-600 mt-2 text-sm">
-        {{ profileForm.get('location')?.value || 'Location not set' }}
+        {{ teacherProfileForm.get('location')?.value || 'Location not set' }}
       </p>
     </div>
     <!-- Avatar Upload with Camera Icon -->
@@ -36,7 +36,7 @@
   </div>
 
   <!-- Form Section -->
-  <form [formGroup]="profileForm" (ngSubmit)="saveProfile()" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <form [formGroup]="teacherProfileForm" (ngSubmit)="saveProfile()" class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <div class="col-span-2">
       <label class="block text-sm font-semibold mb-1">Location</label>
       <input
@@ -92,4 +92,18 @@
       </button>
     </div>
   </form>
+</div>
+
+
+<!-- this is for toast messages -->
+
+<!-- Centered Toast Modal with Overlay -->
+<div *ngIf="showToast" class="fixed inset-0 flex items-center justify-center z-50">
+  <!-- Background Overlay -->
+  <div class="absolute inset-0 bg-grey-100 bg-opacity-10 backdrop-blur-sm"></div>
+
+  <!-- Toast Message -->
+  <div class="relative z-10 bg-purple-300 text-white px-6 py-4 rounded-xl shadow-xl text-center w-80 animate-fade-in">
+    <p class="text-base font-semibold">{{ toastMessage }}</p>
+  </div>
 </div>
