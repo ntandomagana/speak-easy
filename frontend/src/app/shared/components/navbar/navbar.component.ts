@@ -12,6 +12,7 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class NavbarComponent {
   showMenu = false;
+  hasNotifications = true;
 
   constructor(
     private router: Router,
@@ -44,6 +45,9 @@ export class NavbarComponent {
     this.showMenu = !this.showMenu;
   }
 
+ onNotificationClick() {
+  alert('Notifications clicked!');
+}
   // Clear localStorage and navigate to login
   logout(): void {
     localStorage.clear();

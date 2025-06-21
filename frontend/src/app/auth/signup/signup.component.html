@@ -11,7 +11,7 @@
   <!-- Role Selection Container -->
   <div class="flex items-center space-x-6">
     <div
-      (click)="toggleRole('student')"
+      (click)="toggleRole('STUDENT')"
       [class.bg-purple-400]="role === 'student'"
       [class.text-white]="role === 'student'"
       [class.bg-gray-100]="role !== 'student'"
@@ -22,7 +22,7 @@
     </div>
 
     <div
-      (click)="toggleRole('teacher')"
+      (click)="toggleRole('TEACHER')"
       [class.bg-purple-400]="role === 'teacher'"
       [class.text-white]="role === 'teacher'"
       [class.bg-gray-100]="role !== 'teacher'"

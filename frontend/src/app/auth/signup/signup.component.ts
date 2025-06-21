@@ -27,7 +27,7 @@ export class SignupComponent implements OnInit {
       name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      role: ['STUDENT', [Validators.required]]
+      role: ['', [Validators.required]]
     });
   }
 
@@ -36,7 +36,7 @@ export class SignupComponent implements OnInit {
 
   toggleRole(role: string): void {
     this.role = role;
-    this.signupForm.get('role')?.setValue(role);  
+    this.signupForm.get('role')?.setValue(role.toUpperCase());  
   }
 
   onSubmit() {
@@ -84,6 +84,6 @@ export class SignupComponent implements OnInit {
 
   goToHomepage() {
     this.showSuccessModal = false;
-    this.router.navigate(['/teachers-list']); 
+    this.router.navigate(['/teacher-profile']); 
   }
 }
