@@ -30,6 +30,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public BookingDTO createBooking(BookingDTO bookingDTO) {
+        System.out.println("Creating booking with data: " + bookingDTO);
 
         //this will fetch the student and teacher from the db
         Student student = studentRepository.findById(bookingDTO.getStudentId())

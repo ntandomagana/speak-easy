@@ -21,6 +21,7 @@ public class BookingController {
     //endpoint to create a new booking
     @PostMapping
     public BookingDTO createBooking(@RequestBody BookingDTO bookingDTO) {
+        System.out.println("Received booking: " + bookingDTO);
 
         return bookingService.createBooking(bookingDTO);
 

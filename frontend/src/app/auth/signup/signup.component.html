@@ -8,28 +8,32 @@
 
 
             <div class="flex flex-col items-center mt-6">
-              <!-- Role Label -->
-              <!-- <label for="role" class="text-sm font-medium text-gray-900 mb-2"></label> -->
-            
-              <!-- Role Selection Container -->
-              <div class="flex items-center space-x-8 border-2 border-purple-400">
-                <div 
-                  (click)="toggleRole('student')" 
-                  [class.bg-purple-400]="role === 'student'" 
-                  [class.bg-white]="role !== 'student'" 
-                  class="cursor-pointer w-28 h-12 flex items-center justify-center text-purple-700 font-semibold text-lg transition-all duration-300">
-                  Student
-                </div>
-                
-                <div 
-                  (click)="toggleRole('teacher')" 
-                  [class.bg-purple-400]="role === 'teacher'" 
-                  [class.bg-white]="role !== 'teacher'" 
-                  class="cursor-pointer w-28 h-12 flex items-center justify-center text-purple-700 font-semibold text-lg transition-all duration-300">
-                  Teacher
-                </div>
-              </div>
-            </div>
+  <!-- Role Selection Container -->
+  <div class="flex items-center space-x-6">
+    <div
+      (click)="toggleRole('student')"
+      [class.bg-purple-400]="role === 'student'"
+      [class.text-white]="role === 'student'"
+      [class.bg-gray-100]="role !== 'student'"
+      [class.text-purple-700]="role !== 'student'"
+      class="cursor-pointer w-28 h-12 flex items-center justify-center rounded-lg font-semibold text-lg transition duration-300 shadow-sm hover:shadow-md hover:bg-purple-300"
+    >
+      Student
+    </div>
+
+    <div
+      (click)="toggleRole('teacher')"
+      [class.bg-purple-400]="role === 'teacher'"
+      [class.text-white]="role === 'teacher'"
+      [class.bg-gray-100]="role !== 'teacher'"
+      [class.text-purple-700]="role !== 'teacher'"
+      class="cursor-pointer w-28 h-12 flex items-center justify-center rounded-lg font-semibold text-lg transition duration-300 shadow-sm hover:shadow-md hover:bg-purple-300"
+    >
+      Teacher
+    </div>
+  </div>
+</div>
+
             
             
             <div>
@@ -54,6 +58,10 @@
                 <div *ngIf="signupForm.get('email')?.errors?.['required']">Email is required.</div>
                 <div *ngIf="signupForm.get('email')?.errors?.['email']">Please enter a valid email.</div>
               </div>
+
+              <div *ngIf="emailExistsError" class="text-red-600 text-sm mt-1">
+    This email is already registered. Please use a different email.
+  </div>
             </div>
           
             <div>

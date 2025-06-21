@@ -17,6 +17,7 @@ export class SignupComponent implements OnInit {
   showSuccessModal = false; 
   signupForm: FormGroup;
   role: string = 'student';
+  emailExistsError = false;
 
   constructor(private fb: FormBuilder,
      private router: Router,
@@ -39,48 +40,45 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.signupForm.valid) {
-      this.isLoading = true; 
-      console.log(this.signupForm.value);
+  if (this.signupForm.valid) {
+    this.isLoading = true;
+    this.emailExistsError = false; // reset the error before request
 
+    const formValues = this.signupForm.value;
+    console.log('Payload sent to backend:', formValues);
 
-
-      const formValues = this.signupForm.value;
-      console.log('Payload sent to backend:', formValues);
-
-      this.authService.signup(formValues).subscribe({
-        next: (response) => {
-          console.log('Signup successful', response);
-          this.isLoading = false; 
-          this.showSuccessModal = true; 
-
-          //save user information in localStorage
-          localStorage.setItem('token', response.token);
-          localStorage.setItem('role', response.role);
-          localStorage.setItem('loggedInUserInfo', JSON.stringify(formValues));
-          localStorage.setItem('userId', response.userInfo.id);
-
-          //reset the form after saving the values
-          this.signupForm.reset();
-
-
-        },
-         error: (err) => {
+    this.authService.signup(formValues).subscribe({
+      next: (response) => {
+        console.log('Signup successful', response);
         this.isLoading = false;
-        console.error('Signup error:', err); 
-         }
-        })
-      
+        this.showSuccessModal = true;
 
-      setTimeout(() => {
-        this.isLoading = false; 
-        this.showSuccessModal = true; 
-      }, 2000); 
-    } else {
-      this.signupForm.markAllAsTouched();
-      console.log('Form is invalid');
-    }
+        // save user information in localStorage
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('role', response.role);
+        localStorage.setItem('loggedInUserInfo', JSON.stringify(formValues));
+
+        // reset the form after saving the values
+        this.signupForm.reset();
+      },
+      error: (err) => {
+  this.isLoading = false;
+
+  if (err.status === 409) {
+    this.emailExistsError = true;
+  } else {
+    this.emailExistsError = false;
+    console.error('Signup error:', err);
   }
+}
+
+    });
+
+  } else {
+    this.signupForm.markAllAsTouched();
+    console.log('Form is invalid');
+  }
+}
 
   
 

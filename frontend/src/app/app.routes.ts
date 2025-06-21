@@ -4,6 +4,7 @@ import { LandingPageComponent } from './shared/components/landing-page/landing-p
 import { BookLessonComponent } from './shared/components/book-lesson/book-lesson.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 export const routes: Routes = [
     {
@@ -31,5 +32,9 @@ export const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent
+    },
+    {
+        path: 'my-profile',
+        component: UserProfileComponent
     }
 ];

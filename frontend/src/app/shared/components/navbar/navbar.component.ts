@@ -11,36 +11,43 @@ import { AuthService } from '../../../services/auth.service';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  constructor(private router: Router,
-              private authService: AuthService
+  showMenu = false;
+
+  constructor(
+    private router: Router,
+    private authService: AuthService
   ) {}
 
-//method to check login state
+  // Check if user is logged in
   isLoggedIn(): boolean {
     return !!localStorage.getItem('loggedInUserInfo');
   }
 
-    get loggedInUser(): any | null {
+  // Getter: return user object from localStorage
+  get loggedInUser(): any | null {
     const user = localStorage.getItem('loggedInUserInfo');
     return user ? JSON.parse(user) : null;
   }
 
-  // Getter for user name
+  // Getter: return user name
   get loggedInUserName(): string {
     return this.loggedInUser?.name || '';
   }
-  
 
-  getUserRole(): string | null {
-    const user = localStorage.getItem('loggedInUserInfo');
-    if (user) {
-      return JSON.parse(user).role || null;
-    }
-    return null;
+  // Getter: return user role (STUDENT, TEACHER, etc.)
+  get userRole(): string {
+    return this.loggedInUser?.role || '';
   }
 
-  logout() {
+  // Used in HTML to control dropdown visibility
+  toggleMenu(): void {
+    this.showMenu = !this.showMenu;
+  }
+
+  // Clear localStorage and navigate to login
+  logout(): void {
     localStorage.clear();
+    this.showMenu = false;
     this.router.navigate(['/login']);
   }
 }
