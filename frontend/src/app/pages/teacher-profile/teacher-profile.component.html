@@ -1,0 +1,95 @@
+<div class="max-w-4xl mx-auto mt-[90px] bg-white p-8 rounded-xl shadow-lg">
+  <!-- Header Section -->
+  <div class="flex justify-between items-center mb-10">
+    <div class="flex flex-col">
+      <h2 class="text-3xl font-bold text-purple-700">{{ profileForm.get('name')?.value }}</h2>
+      <p class="text-gray-600 mt-2 text-sm">
+        {{ profileForm.get('location')?.value || 'Location not set' }}
+      </p>
+    </div>
+    <!-- Avatar Upload with Camera Icon -->
+<div class="relative group w-36 h-36">
+  <!-- Profile Picture -->
+  <img
+    [src]="profileImageUrl || 'https://via.placeholder.com/140'"
+    alt="Avatar"
+    class="w-36 h-36 rounded-full object-cover border-4 border-purple-300"
+  />
+
+  <!-- Hidden File Input -->
+  <input
+    type="file"
+    accept="image/*"
+    #fileInput
+    (change)="onImageSelected($event)"
+    class="absolute inset-0 opacity-0 cursor-pointer z-20"
+  />
+
+  <!-- Camera Icon Overlay -->
+  <div
+    class="absolute bottom-2 right-2 bg-purple-600 p-2 rounded-full text-white z-10 flex items-center justify-center shadow-lg"
+  >
+    <i class="bi bi-camera-fill text-sm"></i>
+  </div>
+</div>
+
+  </div>
+
+  <!-- Form Section -->
+  <form [formGroup]="profileForm" (ngSubmit)="saveProfile()" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="col-span-2">
+      <label class="block text-sm font-semibold mb-1">Location</label>
+      <input
+        formControlName="location"
+        class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+        placeholder="e.g., South Africa"
+      />
+    </div>
+
+    <div class="col-span-2">
+      <label class="block text-sm font-semibold mb-1">About Me</label>
+      <textarea
+        formControlName="bio"
+        rows="4"
+        class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+        placeholder="Tell students about your experience and teaching style"
+      ></textarea>
+    </div>
+
+    <div>
+      <label class="block text-sm font-semibold mb-1">Languages You Teach</label>
+      <input
+        formControlName="language"
+        class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+        placeholder="e.g., English, French"
+      />
+    </div>
+
+    <div>
+      <label class="block text-sm font-semibold mb-1">Price per Lesson ($)</label>
+      <input
+        type="number"
+        formControlName="price"
+        class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+      />
+    </div>
+
+    <div class="col-span-2">
+      <label class="block text-sm font-semibold mb-1">Availability</label>
+      <input
+        formControlName="availability"
+        class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+        placeholder="e.g., Mon–Fri 8am–5pm"
+      />
+    </div>
+
+    <div class="col-span-2">
+      <button
+      (click)="saveProfile()"
+        class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-lg shadow transition"
+      >
+        Save Profile
+      </button>
+    </div>
+  </form>
+</div>
