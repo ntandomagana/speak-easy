@@ -1,0 +1,49 @@
+<div class="min-h-screen bg-gray-100 p-6">
+  <h1 class="text-3xl font-bold text-gray-800 mb-6">📚 Welcome back, Teacher!</h1>
+
+  <!-- Upcoming Lessons Today -->
+  <div class="bg-white p-6 rounded-xl shadow-lg mb-8">
+    <h2 class="text-2xl font-semibold text-purple-600 mb-4">📅 Lessons Today</h2>
+
+    <div *ngIf="upcomingLessonsToday.length > 0; else noLessonsToday">
+      <div *ngFor="let lesson of upcomingLessonsToday" class="border-b py-4">
+        <div class="flex justify-between items-center">
+          <div>
+            <p class="font-semibold text-lg">{{ lesson.studentName }}</p>
+            <p class="text-sm text-gray-600">{{ lesson.level }} - {{ lesson.language }}</p>
+          </div>
+          <div class="text-right text-purple-500 font-bold text-sm">
+            {{ lesson.time }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noLessonsToday>
+      <p class="text-gray-500">No lessons scheduled for today.</p>
+    </ng-template>
+  </div>
+
+  <!-- Upcoming Lessons This Week -->
+  <div class="bg-white p-6 rounded-xl shadow-lg">
+    <h2 class="text-2xl font-semibold text-purple-600 mb-4">📆 Lessons This Week</h2>
+
+    <div *ngIf="upcomingLessonsThisWeek.length > 0; else noLessonsWeek">
+      <div *ngFor="let lesson of upcomingLessonsThisWeek" class="border-b py-4">
+        <div class="flex justify-between items-center">
+          <div>
+            <p class="font-semibold text-lg">{{ lesson.studentName }}</p>
+            <p class="text-sm text-gray-600">{{ lesson.level }} - {{ lesson.language }}</p>
+          </div>
+          <div class="text-right text-purple-500 text-sm">
+            {{ lesson.date }} - {{ lesson.time }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noLessonsWeek>
+      <p class="text-gray-500">No upcoming lessons this week.</p>
+    </ng-template>
+  </div>
+</div>
