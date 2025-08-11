@@ -37,6 +37,9 @@ export class LoginComponent {
     // this.loginForm.get('role')?.setValue(this.role); 
   }
 
+  goToDashboard() {}
+  
+
   onSubmit() {
     if (this.loginForm.valid) {
       this.isLoading = true; 
