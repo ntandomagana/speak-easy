@@ -6,6 +6,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
 import { StudentProfileComponent } from './pages/student-profile/student-profile.component';
 import { TeacherProfileComponent } from './pages/teacher-profile/teacher-profile.component';
+import { HomeComponent } from './pages/home/home.component';
 
 export const routes: Routes = [
     {
@@ -41,5 +42,9 @@ export const routes: Routes = [
     {
         path: 'teacher-profile',
         component: TeacherProfileComponent
+    },
+    {
+        path: 'home',
+        component: HomeComponent
     }
 ];

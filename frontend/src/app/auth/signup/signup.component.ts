@@ -55,11 +55,12 @@ export class SignupComponent implements OnInit {
 
         // save user information in localStorage
         localStorage.setItem('token', response.token);
-        localStorage.setItem('role', response.role);
+        // localStorage.setItem('role', response.role);
+        localStorage.setItem('role', formValues.role.toUpperCase());
+
         localStorage.setItem('loggedInUserInfo', JSON.stringify(formValues));
 
-        // reset the form after saving the values
-        this.signupForm.reset();
+        
       },
       error: (err) => {
   this.isLoading = false;
@@ -69,6 +70,10 @@ export class SignupComponent implements OnInit {
   } else {
     this.emailExistsError = false;
     console.error('Signup error:', err);
+    // reset the form after saving the values
+        this.signupForm.reset();    
+        this.router.navigate(['/teacher-home']);
+
   }
 }
 
@@ -83,7 +88,17 @@ export class SignupComponent implements OnInit {
   
 
   goToHomepage() {
-    this.showSuccessModal = false;
-    this.router.navigate(['/teacher-profile']); 
+     this.showSuccessModal = false;
+
+  const user = this.signupForm.value;
+  // const role = user.role?.toUpperCase();
+    const role = localStorage.getItem('role');
+      console.log('Routing based on role:', role); 
+          this.router.navigate(['/home']);
+
+
+
+
+  
   }
 }

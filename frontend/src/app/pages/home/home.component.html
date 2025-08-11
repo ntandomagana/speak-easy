@@ -1,0 +1,90 @@
+<div class="min-h-screen bg-gray-100 p-6">
+  <h1 class="text-3xl font-bold text-gray-800 mb-8">📚 Welcome back, Teacher!</h1>
+
+  <!-- Grid Layout -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    
+    <!-- LEFT: Lessons (2/3 width) -->
+    <div class="lg:col-span-2 space-y-8">
+
+      <!-- 📅 Lessons Today -->
+      <div class="bg-white p-6 rounded-xl shadow-lg">
+        <h2 class="text-2xl font-semibold text-purple-600 mb-4 flex items-center gap-2">
+          📅 Lessons Today 
+          <span class="text-sm bg-purple-100 text-purple-700 px-2 py-1 rounded-full">{{ upcomingLessonsToday.length }}</span>
+        </h2>
+
+        <div *ngIf="upcomingLessonsToday.length > 0; else noLessonsToday">
+          <div *ngFor="let lesson of upcomingLessonsToday" class="border-b pb-4 mb-4">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="text-lg font-bold text-gray-800">{{ lesson.studentName }}</p>
+                <p class="text-sm text-gray-500">{{ lesson.level }} · {{ lesson.language }}</p>
+                <p class="text-sm text-gray-500 mt-1">🕒 {{ lesson.time }}</p>
+              </div>
+              <div class="flex flex-col gap-2">
+                <button class="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-purple-700 transition">Join Class</button>
+                <button class="bg-gray-100 text-gray-800 px-4 py-2 rounded-lg text-sm hover:bg-gray-200 transition">Prepare Lesson</button>
+                <button class="bg-blue-100 text-blue-700 px-4 py-2 rounded-lg text-sm hover:bg-blue-200 transition">Student History</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ng-template #noLessonsToday>
+          <p class="text-gray-500">No lessons scheduled for today.</p>
+        </ng-template>
+      </div>
+
+      <!-- 📆 This Week -->
+      <div class="bg-white p-6 rounded-xl shadow-lg">
+        <h2 class="text-2xl font-semibold text-purple-600 mb-4 flex items-center gap-2">
+          📆 Lessons This Week
+          <span class="text-sm bg-purple-100 text-purple-700 px-2 py-1 rounded-full">{{ upcomingLessonsThisWeek.length }}</span>
+        </h2>
+
+        <div *ngIf="upcomingLessonsThisWeek.length > 0; else noLessonsWeek">
+          <div *ngFor="let lesson of upcomingLessonsThisWeek" class="border-b pb-4 mb-4">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="text-lg font-bold text-gray-800">{{ lesson.studentName }}</p>
+                <p class="text-sm text-gray-500">{{ lesson.level }} · {{ lesson.language }}</p>
+                <p class="text-sm text-gray-500 mt-1">📅 {{ lesson.date }} | 🕒 {{ lesson.time }}</p>
+              </div>
+              <div class="flex flex-col gap-2">
+                <button class="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-purple-700 transition">Join</button>
+                <button class="bg-gray-100 text-gray-800 px-4 py-2 rounded-lg text-sm hover:bg-gray-200 transition">Prepare</button>
+                <button class="bg-blue-100 text-blue-700 px-4 py-2 rounded-lg text-sm hover:bg-blue-200 transition">Last 5 Lessons</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ng-template #noLessonsWeek>
+          <p class="text-gray-500">No upcoming lessons this week.</p>
+        </ng-template>
+      </div>
+    </div>
+
+    <!-- RIGHT: Teacher Tools -->
+    <div class="space-y-6">
+      <div class="bg-white p-6 rounded-xl shadow-md">
+        <h3 class="text-lg font-semibold text-gray-700 mb-4">🎯 Teacher Tools</h3>
+
+        <!-- View Reviews -->
+        <button 
+          (click)="goToReviews()"
+          class="w-full bg-purple-200 text-purple-900 px-4 py-3 rounded-lg font-medium hover:bg-purple-300 transition"
+        >
+          ⭐ View My Reviews
+        </button>
+
+        <!-- Add More Tools Later -->
+        <div class="mt-6">
+          <p class="text-gray-500 text-sm">More helpful tools coming soon...</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
