@@ -7,6 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TeacherProfileData } from '../../types/teacher-profile';
+import { TeacherProfileService } from '../../services/teacher-profile.service';
 
 @Component({
   selector: 'app-teacher-profile',
@@ -23,39 +25,62 @@ export class TeacherProfileComponent implements OnInit {
   toastMessage = '';
 
   constructor(private fb: FormBuilder,
-              private router: Router
+              private router: Router,
+              private teacherProfileService: TeacherProfileService
   ) {}
 
-  ngOnInit(): void {
-    const userInfo = JSON.parse(
-      localStorage.getItem('loggedInUserInfo') || '{}'
-    );
+   ngOnInit(): void {
 
     this.teacherProfileForm = this.fb.group({
-      name: [userInfo.name || '', Validators.required],
-      location: ['', Validators.required],
-      bio: ['', Validators.required],
-      language: ['', Validators.required],
-      price: ['', Validators.required],
-      availability: ['', Validators.required],
-    });
+    name: ['', Validators.required],
+    location: ['', Validators.required],
+    bio: ['', Validators.required],
+    language: ['', Validators.required],
+    price: ['', [Validators.required, Validators.min(0)]],
+    availability: ['', Validators.required],
+  });
+
+    // Load saved profile from localStorage if exists
+    const savedProfile = localStorage.getItem('loggedInTeacherProfile');
+    const userInfo = localStorage.getItem('loggedInUserInfo');
+
+    if (savedProfile) {
+      const profile: TeacherProfileData = JSON.parse(savedProfile);
+      this.teacherProfileForm.patchValue(profile);
+      console.log('Loaded profile from localStorage:', profile);
+      this.profileImageUrl = profile.profileImageUrl || null;
+    } else if (userInfo) {
+      const user = JSON.parse(userInfo);
+      this.teacherProfileForm.patchValue({ name: user.name });
+      console.log('Loaded user info from localStorage:', user);
+    }
   }
 
   saveProfile(): void {
     if (this.teacherProfileForm.valid) {
-      const profileData = {
+      const profileData: TeacherProfileData = {
         ...this.teacherProfileForm.value,
-        profileImage: this.selectedImageFile
-          ? this.selectedImageFile.name
-          : 'No image selected',
+        profileImage: this.selectedImageFile ? this.selectedImageFile.name : this.profileImageUrl || null
       };
 
-      console.log('Profile data to save:', profileData);
-      this.showSuccessToast('Profile saved successfully!');
-      
-      setTimeout(() => {
-        this.router.navigate(['/home']);
-      })
+      this.teacherProfileService.saveProfile(profileData).subscribe({
+        next: (res: TeacherProfileData) => {
+          console.log('Profile saved successfully', res);
+
+          // Save profile in localStorage
+          localStorage.setItem('loggedInTeacherProfile', JSON.stringify(res));
+
+          this.showSuccessToast('Profile saved successfully!');
+          setTimeout(() => {
+            this.router.navigate(['/home']);
+          }, 2000);
+        },
+        error: (err) => {
+          console.error('Error saving profile', err);
+          this.showSuccessToast('Error saving profile. Please try again.');
+        }
+      });
+
     } else {
       this.showSuccessToast('Please fill in all required fields.');
       this.teacherProfileForm.markAllAsTouched();
