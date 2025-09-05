@@ -11,10 +11,6 @@ export class TeacherProfileService {
 
   constructor(private http: HttpClient) { }
 
-  // saveProfile(profileData: TeacherProfileData): Observable<TeacherProfileData> {
-  //   return this.http.post<TeacherProfileData>(`${this.apiUrl}/profile`, profileData);
-  // }
-
   saveProfile(profileData: TeacherProfileData) {
   return this.http.post<TeacherProfileData>(`${this.apiUrl}`, profileData); 
 }

@@ -58,6 +58,9 @@ export class TeacherProfileComponent implements OnInit {
 
   saveProfile(): void {
     if (this.teacherProfileForm.valid) {
+
+       const email = this.teacherProfileForm.get('email')?.value;
+       
       const profileData: TeacherProfileData = {
         ...this.teacherProfileForm.value,
         profileImage: this.selectedImageFile ? this.selectedImageFile.name : this.profileImageUrl || null
