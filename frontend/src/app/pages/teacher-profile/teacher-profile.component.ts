@@ -1,28 +1,35 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-teacher-profile',
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './teacher-profile.component.html',
-  styleUrl: './teacher-profile.component.css'
+  styleUrl: './teacher-profile.component.css',
 })
 export class TeacherProfileComponent implements OnInit {
-
   teacherProfileForm!: FormGroup;
   profileImageUrl: string | null = null;
-    selectedImageFile: File | null = null;
+  selectedImageFile: File | null = null;
 
   showToast = false;
   toastMessage = '';
 
-
-
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,
+              private router: Router
+  ) {}
 
   ngOnInit(): void {
-    const userInfo = JSON.parse(localStorage.getItem('loggedInUserInfo') || '{}');
+    const userInfo = JSON.parse(
+      localStorage.getItem('loggedInUserInfo') || '{}'
+    );
 
     this.teacherProfileForm = this.fb.group({
       name: [userInfo.name || '', Validators.required],
@@ -38,12 +45,17 @@ export class TeacherProfileComponent implements OnInit {
     if (this.teacherProfileForm.valid) {
       const profileData = {
         ...this.teacherProfileForm.value,
-        profileImage: this.selectedImageFile ? this.selectedImageFile.name : 'No image selected'
+        profileImage: this.selectedImageFile
+          ? this.selectedImageFile.name
+          : 'No image selected',
       };
 
       console.log('Profile data to save:', profileData);
       this.showSuccessToast('Profile saved successfully!');
       
+      setTimeout(() => {
+        this.router.navigate(['/home']);
+      })
     } else {
       this.showSuccessToast('Please fill in all required fields.');
       this.teacherProfileForm.markAllAsTouched();
@@ -56,19 +68,17 @@ export class TeacherProfileComponent implements OnInit {
 
     setTimeout(() => {
       this.showToast = false;
-    }, 3000); 
+    }, 3000);
   }
 
   onImageSelected(event: Event): void {
-  const file = (event.target as HTMLInputElement).files?.[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.profileImageUrl = reader.result as string;
-    };
-    reader.readAsDataURL(file);
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.profileImageUrl = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
   }
-}
-
-
 }
