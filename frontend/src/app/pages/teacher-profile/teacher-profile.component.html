@@ -7,6 +7,15 @@
         {{ teacherProfileForm.get('location')?.value || 'Location not set' }}
       </p>
     </div>
+
+    <div class="flex items-center gap-2 mb-6">
+  <span
+    class="px-2 py-1 text-sm rounded-full bg-purple-100 text-purple-700 font-medium"
+  >
+    {{ userRole }}
+  </span>
+</div>
+
     <!-- Avatar Upload with Camera Icon -->
 <div class="relative group w-36 h-36">
   <!-- Profile Picture -->

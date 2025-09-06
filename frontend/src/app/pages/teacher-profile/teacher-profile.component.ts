@@ -24,21 +24,24 @@ export class TeacherProfileComponent implements OnInit {
   showToast = false;
   toastMessage = '';
 
-  constructor(private fb: FormBuilder,
-              private router: Router,
-              private teacherProfileService: TeacherProfileService
+  userRole: string | null = null;
+
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private teacherProfileService: TeacherProfileService
   ) {}
 
-   ngOnInit(): void {
-
+  ngOnInit(): void {
     this.teacherProfileForm = this.fb.group({
-    name: ['', Validators.required],
-    location: ['', Validators.required],
-    bio: ['', Validators.required],
-    language: ['', Validators.required],
-    price: ['', [Validators.required, Validators.min(0)]],
-    availability: ['', Validators.required],
-  });
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      location: ['', Validators.required],
+      bio: ['', Validators.required],
+      language: ['', Validators.required],
+      price: ['', [Validators.required, Validators.min(0)]],
+      availability: ['', Validators.required],
+    });
 
     // Load saved profile from localStorage if exists
     const savedProfile = localStorage.getItem('loggedInTeacherProfile');
@@ -51,7 +54,11 @@ export class TeacherProfileComponent implements OnInit {
       this.profileImageUrl = profile.profileImageUrl || null;
     } else if (userInfo) {
       const user = JSON.parse(userInfo);
-      this.teacherProfileForm.patchValue({ name: user.name });
+      this.teacherProfileForm.patchValue({ 
+        name: user.name,
+        email: user.email
+       }); 
+       this.userRole = user.role || null;
       console.log('Loaded user info from localStorage:', user);
     }
   }
@@ -59,11 +66,11 @@ export class TeacherProfileComponent implements OnInit {
   saveProfile(): void {
     if (this.teacherProfileForm.valid) {
 
-       const email = this.teacherProfileForm.get('email')?.value;
-       
       const profileData: TeacherProfileData = {
         ...this.teacherProfileForm.value,
-        profileImage: this.selectedImageFile ? this.selectedImageFile.name : this.profileImageUrl || null
+        profileImage: this.selectedImageFile
+          ? this.selectedImageFile.name
+          : this.profileImageUrl || null,
       };
 
       this.teacherProfileService.saveProfile(profileData).subscribe({
@@ -81,9 +88,8 @@ export class TeacherProfileComponent implements OnInit {
         error: (err) => {
           console.error('Error saving profile', err);
           this.showSuccessToast('Error saving profile. Please try again.');
-        }
+        },
       });
-
     } else {
       this.showSuccessToast('Please fill in all required fields.');
       this.teacherProfileForm.markAllAsTouched();
